@@ -18,9 +18,7 @@ func main() {
 
 func ConvertTemp(value float64) float64 {
 	args1, args2 := os.Args[2], os.Args[3]
-	if len(os.Args) < 4 {
-		fmt.Println("ERRO: faltam argumentos para a operação")
-	} else if args1 == "-cl" && args2 == "-fh" {
+	if args1 == "-cl" && args2 == "-fh" {
 		value = (value * 9 / 5) + 32
 	} else if args1 == "-fh" && args2 == "-cl" {
 		value = (value - 32) * 5 / 9
