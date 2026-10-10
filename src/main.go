@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"math"
 	"os"
 	"strconv"
 )
@@ -18,6 +19,7 @@ func main() {
 	}
 
 	ConvertTemp(value)
+	ConvertLenght(value)
 }
 
 func ConvertTemp(value float64) {
@@ -35,4 +37,28 @@ func ConvertTemp(value float64) {
 		value = value - 273.15
 		fmt.Println(value)
 	}
+}
+
+func ConvertLenght(value float64) {
+	units := map[string]int{
+		"-Km":  1,
+		"-Hm":  2,
+		"-Dam": 3,
+		"-m":   4,
+		"-dm":  5,
+		"-cm":  6,
+		"-mm":  7,
+	}
+	var origin, destiny string
+
+	for _, args := range os.Args[2:] {
+		if origin == "" {
+			origin = args
+		} else {
+			destiny = args
+		}
+	}
+	exponent := units[destiny] - units[origin]
+	result := value * math.Pow(10, float64(exponent))
+	fmt.Println(result)
 }
